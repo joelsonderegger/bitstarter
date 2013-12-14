@@ -3,10 +3,12 @@ var app = express();
 app.use(express.logger());
 var fs = require('fs');
 
-var data = fs.readFileSync('index.html', 'utf-8');
+app.configure(function(){app.use(express.static(__dirname + '/public'));});
+
+var output = fs.readFileSync("./index.html").toString();
 
 app.get('/', function(request, response) {
-  response.send(data);
+  response.send(output);
 });
 
 var port = process.env.PORT || 8080;
