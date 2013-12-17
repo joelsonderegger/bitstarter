@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Signika+Negative);
 
 body {
-  padding-top: 70px;
+  padding-top: 120px;
   padding-bottom: 30px;
   background-color: #eeebe4;
   font-family: 'Signika Negative', sans-serif;
@@ -23,6 +23,42 @@ body {
 	background-image: none;
 }
 
+.navbar-nav {
+  font-size: 18px;
+}
+
 h1{
 	font-family: 'Signika Negative', sans-serif;
+}
+
+.subnavi{
+  height:40px;
+  width: 100%;
+  background-color: #444444;
+}
+
+
+
+
+
+.subnavi > .container {
+  
+  height: 100%;
+}
+
+.subnavi > .container > .navbar-nav
+{
+  background-image: none;
+  color: #ffffff;
+}
+
+.subnavi > .container > .navbar-nav>a
+{
+ padding: 0;
+}
+
+.subnavi > .container > .navbar-nav>.active>a
+{
+  background-color: #334f67;
+  background-image: none;
 }

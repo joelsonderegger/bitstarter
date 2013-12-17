@@ -1,5 +1,5 @@
 {
-  "name": "node-js-sample",
+  "name": "artsneaker",
   "version": "0.0.3",
   "description": "a sample node.js app for heroku",
   "main": "web.js",
@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express": "~3.3.4"
+    "express": "~3.3.4",
+    "hbs":"*"
   },
   "engines": {
     "node": "0.10.x",
