@@ -1,10 +1,19 @@
 var express = require('express');
-var app = express();
-app.use(express.logger());
 var fs = require('fs');
 var hbs = require('hbs');
-app.configure(function(){app.use(express.static(__dirname + '/public'));});
 
+
+var app = express();
+app.use(express.logger());
+
+
+
+app.configure(function(){
+	app.use(express.static(__dirname + '/public'));
+    app.use(express.bodyParser());
+});
+
+ 
 
 var blogEngine = require('./artsneaker');
 app.set('view engine', 'html');
@@ -16,8 +25,46 @@ app.get('/', function(req, res){
 });
 
 app.get('/upload', function(req, res){
-	res.render('upload', {title:"Upload"});
+	res.render('upload', {title:"Battle"});
 });
+
+app.post('/uploadsubmit', function(req, res){
+	
+	fs.readFile(req.files.image.path, function (err, data) {
+
+		var imageName = req.files.image.name
+
+		/// If there's an error
+		if(!imageName){
+
+			console.log("There was an error")
+			res.redirect("/");
+			res.end();
+
+		} else {
+			var id = 1;
+		  var newPath = __dirname + "/uploads/fullsize/" + id +".png";
+
+		  /// write file to uploads/fullsize folder
+		  fs.writeFile(newPath, data, function (err) {
+
+		  	/// let's see it
+		  	res.redirect("/uploads/fullsize/" + imageName);
+
+		  });
+		}
+	});
+});
+
+/// Show files
+app.get('/uploads/fullsize/:file', function (req, res){
+	file = req.params.file;
+	var img = fs.readFileSync(__dirname + "/uploads/fullsize/" + file);
+	res.writeHead(200, {'Content-Type': 'image/jpg' });
+	res.end(img, 'binary');
+
+});
+
 
 app.get('/battle', function(req, res){
 	res.render('battle', {title:"Battle"});
